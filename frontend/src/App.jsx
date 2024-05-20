@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { Button, Textarea, Modal, TextInput, Sidebar, SidebarItemGroup, SidebarItems, SidebarItem } from "flowbite-react";
 import { HiDocumentText, HiArchive } from "react-icons/hi";
 import { NewCard, NoteCard } from "./components/NoteCard"
-
+import { HiInformationCircle } from "react-icons/hi";
+import { Alert } from "flowbite-react";
 
 const App = () => {
   const [notes, setNotes] = useState({});
   const [openModal, setOpenModal] = useState(false);
   const [showArchived, setShowArchived] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,13 +45,19 @@ const App = () => {
         body: JSON.stringify(payload),
       });
 
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(`${err.statusCode} ${err.message}`);
+      }
+
       const responseContent = await response.json();
 
       setNotes({ [responseContent["id"]]: responseContent, ...notes });
       setOpenModal(false);
     }
     catch (error) {
-      console.error(error)
+      setError(error.message);
+      console.error(error);
     }
   }
 
@@ -157,11 +165,12 @@ const App = () => {
     <>
       <div className="min-h-full">
 
-        <header className="bg-white shadow">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Notes App</h1>
-          </div>
-        </header>
+          {
+            error ? <Alert color="failure" icon={HiInformationCircle}>
+              <span className="font-medium">Error </span> {error}
+            </Alert> : ""
+          }
+
 
         <div className='flex flex-row py-6 px-2 sm:px-6 lg:px-8'>
 
