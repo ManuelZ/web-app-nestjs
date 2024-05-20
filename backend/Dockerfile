@@ -10,7 +10,4 @@ RUN npm install
 COPY backend/*.json ./
 COPY backend/src ./
 
-# Don't forget to delete this
-COPY backend/.env ./
-
 CMD [ "npm", "run", "start"]
