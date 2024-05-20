@@ -17,7 +17,7 @@ To run, the application requires:
 
 ## How to run
 
-In the root of the application (this folder), run:
+In the root folder, run:
 
 ```
 sudo ./run.sh
