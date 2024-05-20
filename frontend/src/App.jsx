@@ -216,7 +216,7 @@ const App = () => {
 
         <main className='container mx-auto max-w-7xl h-full'>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 h-full overflow-hidden">
+          <div className="flex flex-col gap-3 h-full overflow-hidden">
             {noteCards}
           </div>
 
