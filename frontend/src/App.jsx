@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Button, Textarea, Modal, TextInput, Sidebar, SidebarItemGroup, SidebarItems, SidebarItem } from "flowbite-react";
-import { HiDocumentText, HiArchive } from "react-icons/hi";
+import { HiMinus, HiArrowRight } from "react-icons/hi";
 import { NewCard, NoteCard } from "./components/NoteCard"
 import { HiInformationCircle } from "react-icons/hi";
 import { Alert } from "flowbite-react";
@@ -100,6 +100,7 @@ const App = () => {
     const headers = new Headers({
       "Content-Type": "application/json"
     });
+
     try {
 
       await fetch(`http://localhost:3000/api/notes/${id}`, {
@@ -121,7 +122,6 @@ const App = () => {
     const headers = new Headers({
       "Content-Type": "application/json"
     });
-
 
     try {
 
@@ -162,8 +162,11 @@ const App = () => {
 
 
   return (
-    <>
-      <div className="min-h-full">
+    <div className="min-h-full">
+
+      <header className="bg-gray-50 shadow">
+        <div className="mx-auto flex flex-row justify-around max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900">Notes App</h1>
 
           {
             error ? <Alert color="failure" icon={HiInformationCircle}>
@@ -171,56 +174,56 @@ const App = () => {
             </Alert> : ""
           }
 
-
-        <div className='flex flex-row py-6 px-2 sm:px-6 lg:px-8'>
-
-          <Sidebar aria-label="Default sidebar example">
-            <SidebarItems>
-              <SidebarItemGroup>
-                <SidebarItem href="#" icon={HiDocumentText} onClick={() => { setShowArchived(false) }}>
-                  Active notes
-                </SidebarItem>
-                <SidebarItem href="#" icon={HiArchive} onClick={() => { setShowArchived(true) }}>
-                  Archived notes
-                </SidebarItem>
-              </SidebarItemGroup>
-            </SidebarItems>
-          </Sidebar>
-
-          <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
-            <Modal.Header />
-            <Modal.Body>
-              <form className="space-y-3" onSubmit={handleNoteCreateSubmit}>
-                <h3 className="text-xl font-medium text-gray-900 dark:text-white">Create new note</h3>
-                <TextInput id="noteTitle" name="noteTitle" type="text" placeholder="Title" />
-                <Textarea
-                  className="block p-3 h-full w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                  onChange={() => { console.log("Change") }}
-                  id="noteContent"
-                  name="noteContent"
-                  rows="4"
-                  required
-                  placeholder="Content"
-                />
-                <div className="w-full flex flex-row justify-around items-center">
-                  <Button type="submit">Create</Button>
-                  <Button>Cancel</Button>
-                </div>
-              </form>
-            </Modal.Body>
-          </Modal>
-
-          <main className='container mx-auto max-w-7xl h-full'>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 h-full overflow-hidden">
-              {noteCards}
-            </div>
-
-          </main>
-
         </div>
-      </div >
-    </>
+      </header>
+
+      <div className='flex flex-row py-6 px-2 sm:px-4 lg:px-6'>
+
+        <Sidebar>
+          <SidebarItems>
+            <SidebarItemGroup>
+              <SidebarItem icon={showArchived ? HiMinus : HiArrowRight} onClick={() => { setShowArchived(false) }}>
+                Active notes
+              </SidebarItem>
+              <SidebarItem icon={showArchived ? HiArrowRight : HiMinus} onClick={() => { setShowArchived(true) }}>
+                Archived notes
+              </SidebarItem>
+            </SidebarItemGroup>
+          </SidebarItems>
+        </Sidebar>
+
+        <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
+          <Modal.Header />
+          <Modal.Body>
+            <form className="space-y-3" onSubmit={handleNoteCreateSubmit}>
+              <h3 className="text-xl font-medium text-gray-900 dark:text-white">Create new note</h3>
+              <TextInput id="noteTitle" name="noteTitle" type="text" placeholder="Title" />
+              <Textarea
+                className="block p-3 h-full w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                id="noteContent"
+                name="noteContent"
+                rows="4"
+                required
+                placeholder="Content"
+              />
+              <div className="w-full flex flex-row justify-around items-center">
+                <Button type="submit">Create</Button>
+                <Button>Cancel</Button>
+              </div>
+            </form>
+          </Modal.Body>
+        </Modal>
+
+        <main className='container mx-auto max-w-7xl h-full'>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 h-full overflow-hidden">
+            {noteCards}
+          </div>
+
+        </main>
+
+      </div>
+    </div >
   )
 }
 
