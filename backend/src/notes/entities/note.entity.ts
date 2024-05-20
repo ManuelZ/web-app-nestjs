@@ -8,7 +8,7 @@ export class Note {
   @Column({ default: '' })
   title: string;
 
-  @Column({ default: '', length: 1000 })
+  @Column({ default: '', length: 9999 })
   content: string;
 
   @Column({ default: false })
