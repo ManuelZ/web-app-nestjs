@@ -208,7 +208,7 @@ const App = () => {
               />
               <div className="w-full flex flex-row justify-around items-center">
                 <Button type="submit">Create</Button>
-                <Button>Cancel</Button>
+                <Button onClick={() => setOpenModal(false)}>Cancel</Button>
               </div>
             </form>
           </Modal.Body>
