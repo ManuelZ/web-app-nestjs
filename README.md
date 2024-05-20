@@ -5,12 +5,27 @@ My Ensolvers-challenge solution, a minimalistic note taking application capable 
  - Archiving and unarchiving notes
  - Displaying active or archived notes
 
-The application is composed of a MySql database, a backend basde on NestJS and a React frontend. 
+The application is composed of a MySql database, a backend based on NestJS and a React frontend. 
 All are containerized with Docker and orchestrated through Docker-Compose.
 
-To run, the applications requires:
+## Requirements
+
+To run, the application requires:
+
 - Docker: v24.0
 - Docker-Compose: v1.29
+
+## How to run
+
+In the root of the application (this folder), run:
+
+```
+sudo ./run.sh
+```
+
+To access the application, open http://localhost:8000 in a browser.
+
+## Versions
 
 The database is:
 - MySql: v8.4
@@ -27,12 +42,3 @@ The frontend has been created using:
 - Npm: v10.7
 
 
-## How to run
-
-In the root of the application (this folder), run:
-
-```
-sudo ./run.sh
-```
-
-To access the application, open http://localhost:8000 in a browser.
