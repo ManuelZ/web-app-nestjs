@@ -1,5 +1,7 @@
 ## Notes application
 
+![alt text](images/image.png)
+
 A demonstrative note-taking application capable of:
  - Creating, editing and deleting notes
  - Archiving and unarchiving notes
