@@ -14,9 +14,9 @@ Includes instructions to deploy the web app using Azure App Service.
 
 ## Technologies
 
-Database: Azure SQL Database
-Frontend: React and TailwindCSS, deployed using Azure Static Web Apps
-Backend: Nestjs and Docker, deployed using Azure App Service
+- Database: Azure SQL Database
+- Frontend: React and TailwindCSS, deployed using Azure Static Web Apps
+- Backend: Nestjs and Docker, deployed using Azure App Service
 
 ## Deploy the web app using Azure App Services
 
