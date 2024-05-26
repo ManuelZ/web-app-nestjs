@@ -9,7 +9,7 @@ import { ConfigService } from '@nestjs/config';
       useFactory: (configService: ConfigService) => ({
         type: 'mysql',
         host: configService.getOrThrow('DB_HOST'),
-        port: configService.getOrThrow('DB_PORT'),
+        port: parseInt(configService.getOrThrow('DB_PORT'), 10),
         username: configService.getOrThrow('DB_USERNAME'),
         password: configService.getOrThrow('DB_ROOT_PASSWORD'),
         database: configService.getOrThrow('DB_NAME'),
