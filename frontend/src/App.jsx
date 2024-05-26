@@ -11,9 +11,10 @@ const App = () => {
   const [showArchived, setShowArchived] = useState(false);
   const [error, setError] = useState(null);
 
+
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:3000/api/notes/${showArchived ? 'archived' : 'active'}`);
+      const response = await fetch(`http://${import.meta.env.VITE_BACKEND_URL}/api/notes/${showArchived ? 'archived' : 'active'}`);
       const notesArray = await response.json();
       let notesDict = Object.fromEntries(notesArray.map(x => [x.id, x]));
       setNotes(notesDict);
@@ -39,7 +40,7 @@ const App = () => {
     });
 
     try {
-      const response = await fetch(`http://localhost:3000/api/notes`, {
+      const response = await fetch(`http://${import.meta.env.VITE_BACKEND_URL}/api/notes`, {
         method: "POST",
         headers: headers,
         body: JSON.stringify(payload),
@@ -74,7 +75,7 @@ const App = () => {
 
     try {
 
-      await fetch(`http://localhost:3000/api/notes/${id}`, {
+      await fetch(`http://${import.meta.env.VITE_BACKEND_URL}/api/notes/${id}`, {
         method: "PATCH",
         headers: headers,
         body: JSON.stringify({
@@ -103,7 +104,7 @@ const App = () => {
 
     try {
 
-      await fetch(`http://localhost:3000/api/notes/${id}`, {
+      await fetch(`http://${import.meta.env.VITE_BACKEND_URL}/api/notes/${id}`, {
         method: "DELETE",
         headers: headers,
       });
@@ -125,7 +126,7 @@ const App = () => {
 
     try {
 
-      await fetch(`http://localhost:3000/api/notes/${id}`, {
+      await fetch(`http://${import.meta.env.VITE_BACKEND_URL}/api/notes/${id}`, {
         method: "PATCH",
         headers: headers,
         body: JSON.stringify({ "isArchived": archiveStatus }),
