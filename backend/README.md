@@ -1,37 +1,31 @@
 ## Docker build
 
-```
-sudo docker build --build-arg BACKEND_PORT=3000 -t backend:latest .
-```
+Build the image:
 
-## Installation
-
-```bash
-$ npm install
+```
+docker build -f ./backend/Dockerfile --build-arg BACKEND_PORT=3000 -t backend:latest .
 ```
 
-## Running the app
+Add a new tag to the image:
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```
+docker tag backend:latest manuelacregistry.azurecr.io/backend:v3
 ```
 
-## Test
+Login to the registry:
 
-```bash
-# unit tests
-$ npm run test
+```
+az acr login --name manuelacregistry
+```
 
-# e2e tests
-$ npm run test:e2e
+Push the image to the registry:
 
-# test coverage
-$ npm run test:cov
+```
+docker push manuelacregistry.azurecr.io/backend:v3
+```
+
+Test in a disposable local container:
+
+```
+docker run --rm -e DB_HOST="azuresql-server-for-nestjs.database.windows.net" -e DB_USERNAME="azureuser" -e DB_ROOT_PASSWORD="PASSWORD" -e DB_NAME="test" -e DB_PORT="1433" -e DB_SYNCHRONIZE="true" -p 3000:3000 -it backend:latest
 ```
