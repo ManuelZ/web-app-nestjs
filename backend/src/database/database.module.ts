@@ -7,12 +7,16 @@ import { ConfigService } from '@nestjs/config';
   imports: [
     TypeOrmModule.forRootAsync({
       useFactory: (configService: ConfigService) => ({
+        type: 'mssql',
         logging: true,
         host: configService.getOrThrow('DB_HOST'),
         port: parseInt(configService.getOrThrow('DB_PORT'), 10),
         username: configService.getOrThrow('DB_USERNAME'),
         password: configService.getOrThrow('DB_ROOT_PASSWORD'),
         database: configService.getOrThrow('DB_NAME'),
+        options: {
+          encrypt: true,
+        },
         entities: [Note],
         autoLoadEntities: true,
         synchronize: configService.getOrThrow('DB_SYNCHRONIZE'), // gotta be false in production
